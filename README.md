@@ -37,43 +37,62 @@
 
 五、核心代码
 
-package gongzi;
-
-public class Graduate implements StudentInterface, TeacherInterface{
-    private String name;
-    private String sex;
-    private int age;
-    private double xuefei;
-    private double salary;
-    public void setName(String a) {
-        name = a;
+public class graduate implements student,teacher{
+ String name;
+ String sex;
+ int age;
+ double fee;
+ double pay;
+ @Override
+ public void setPay(double pay) {
+ this.pay = pay * 12;
+ System.out.println("您的年收入为：" + this.pay + "元");
+ }
+ @Override
+ public void getPay(double pay) {
+  this.pay = pay * 12;
+  System.out.println("您的月收入为：" + this.pay + "元");
+  }
+ @Override
+ public void setFee(double fee) {
+  this.fee = fee; 
+  System.out.println("您的学费为：" + this.fee + "元");
+  }
+ @Override
+ public void getFee(double fee) {
+  this.fee = fee;
+  System.out.println("您的学费为：" + this.fee);
+  }
+ public boolean Loan(){
+  if ((this.pay - this.fee) <42000) {
+   System.out.println("您的年收入" + this.pay + ",减去学费" + this.fee + "等于" + (this.pay - this.fee));
+   return true;
+   }
+  System.out.println("您的年收入" + this.pay + "元,减去学费" + this.fee +"元,减去"+ 42000 + "元,乘" + 0.03 + "等于" + (this.pay - this.fee - 3500)*0.03 + "元");
+  return false;
+  }
+ public static void main(String[] args) {
+  graduate graduate = new graduate();
+  graduate.name = "张三";
+  System.out.println("您好:" + graduate.name);
+  try {
+    Scanner input = new Scanner(System.in);
+     System.out.println("请输入您的月工资：");
+     double pay = input.nextDouble();
+     graduate.setPay(pay);
+     System.out.println("请输入您的学费：");
+     double fee = input.nextDouble();
+     graduate.setFee(fee);
+        input.close();
+    boolean flag = graduate.Loan();
+    if (flag) {
+     System.out.println("您无需缴税。");
+    }else {
+     System.out.println("您需要缴税"+(pay*12 - fee - 3500)*0.03+("元"));
     }
-    public void setSex(String a) {
-        sex = a;
-    }
-    public void setAge(int a) {
-        age = a;
-    }
-    public void setmoney(double a, double b) {
-        xuefei = a;
-        salary = b;
-    }
-    public double setxuefei(){
-        return 0;
-    }
-    public double getxuefei(){//返回每学年的费用
-        return xuefei * 2;
-    }
-    public double setsalary(){
-        return 0;
-    }
-    public double getsalary(){//返回年收入
-        return salary * 12;
-    }
-
-}
 六、实验截图
 https://github.com/lixuan0115/shiyan4/blob/main/%E5%AE%9E%E9%AA%8C4%E7%BB%93%E6%9E%9C.jpg
 
 
 七、实验感想
+通过此次实验使我对interface定义接口，implement实现接口有的一定了解，学会了构建类，学会了构建方法，学会了不同作用域的作用与调用方法。
